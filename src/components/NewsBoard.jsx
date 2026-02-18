@@ -6,9 +6,17 @@ const NewsBoard = ({ category = "general" }) => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const url = `https://gnews.io/api/v4/top-headlines?country=in&category=${category}&lang=en&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`;
-      const res = await fetch(url);
+      const API_KEY = "346fdd156f71d5936a2a6e0f1924fe41";
+
+      const gnewsUrl = `https://gnews.io/api/v4/top-headlines?country=in&category=${category}&lang=en&apikey=${API_KEY}`;
+
+      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(
+        gnewsUrl
+      )}`;
+
+      const res = await fetch(proxyUrl);
       const data = await res.json();
+
       setArticles(data.articles || []);
     };
 
@@ -23,7 +31,10 @@ const NewsBoard = ({ category = "general" }) => {
 
       <div className="row">
         {articles.map((news, index) => (
-          <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={index}>
+          <div
+            className="col-lg-4 col-md-6 col-sm-12 mb-4"
+            key={index}
+          >
             <NewsItem
               title={news.title}
               description={news.description}
