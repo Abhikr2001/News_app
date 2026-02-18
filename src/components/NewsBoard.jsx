@@ -6,7 +6,10 @@ const NewsBoard = ({ category = "general" }) => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const url = `https://gnews.io/api/v4/top-headlines?country=in&category=${category}&lang=en&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`;
+      const API_KEY = "346fdd156f71d5936a2a6e0f1924fe41";
+
+      let url = `https://gnews.io/api/v4/top-headlines?country=in&category=${category}&lang=en&apikey=${API_KEY}`;
+
       const res = await fetch(url);
       const data = await res.json();
       setArticles(data.articles || []);
