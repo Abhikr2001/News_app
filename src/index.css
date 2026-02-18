@@ -1,18 +1,24 @@
-/* Fix image overflow */
+/* Mobile optimization */
+@media (max-width: 576px) {
+  .news-img {
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .news-card {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet optimization */
+@media (max-width: 768px) {
+  .news-img {
+    height: 170px;
+  }
+}
+
+/* Desktop */
 .news-img {
   height: 200px;
   object-fit: cover;
-}
-
-/* Smooth card edges */
-.card {
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* Improve spacing on small screens */
-@media (max-width: 576px) {
-  .news-img {
-    height: 180px;
-  }
 }

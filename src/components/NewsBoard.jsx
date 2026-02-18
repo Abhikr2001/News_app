@@ -1,35 +1,33 @@
 import { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
 
-const NewsBoard = ({ category }) => {
-  const [articles, setarticle] = useState([]);
+const NewsBoard = ({ category = "general" }) => {
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
-    
+    const fetchNews = async () => {
+      const url = `https://gnews.io/api/v4/top-headlines?country=in&category=${category}&lang=en&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      setArticles(data.articles || []);
+    };
 
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setarticle(data.articles || []));
+    fetchNews();
   }, [category]);
 
   return (
-    <div className="container my-4">
+    <div className="container mt-4">
       <h2 className="text-center mb-4">
         Latest <span className="badge bg-danger">News</span>
       </h2>
 
-      <div className="row g-4">
+      <div className="row">
         {articles.map((news, index) => (
-          <div
-            className="col-12 col-sm-6 col-md-4 col-lg-3"
-            key={index}
-          >
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={index}>
             <NewsItem
               title={news.title}
               description={news.description}
-              src={news.urlToImage}
+              src={news.image}
               url={news.url}
             />
           </div>
