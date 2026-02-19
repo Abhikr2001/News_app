@@ -4,10 +4,11 @@ import NewsBoard from "./components/NewsBoard";
 import Footer from "./components/Footer";
 
 const App = () => {
-  const [category,setCategory]=useState("general")
+  const [category, setCategory] = useState("general");
+
   return (
     <div>
-      <Navbar setCategory={setCategory}/>
+      <Navbar setCategory={setCategory} />
       <NewsBoard category={category} />
       <Footer />
     </div>
